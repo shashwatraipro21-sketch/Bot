@@ -17,8 +17,7 @@ my_details = """
 😌 Personality: Calm person
 🎂 Age: 16
 🎯 Goal: Preparing for NEET
-"""if __name__ == "__main__":
-    main()
+"""
 
 # /start command
 def start(update, context):
@@ -45,7 +44,6 @@ def chat(update, context):
     update.message.reply_text(reply)
 
 def main():
-    # ⚠️ TOKEN yahan paste karo (env variable recommended)
     TOKEN = "8010414260:AAGCeBZuzLGTzOTJWrXPohsKpeSeQh3Bgdw"
 
     updater = Updater(TOKEN, use_context=True)
@@ -57,6 +55,7 @@ def main():
     updater.start_polling()
     updater.idle()
 
-# ✅ FIXED ENTRY POINT
+# ENTRY POINT (must be at end)
 if __name__ == "__main__":
     main()
+
