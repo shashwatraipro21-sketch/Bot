@@ -1,13 +1,14 @@
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import logging
+import os
 
-# Logging for debugging
+# Logging
 logging.basicConfig(
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
     level=logging.INFO
 )
 
-# Your details
+# Details
 my_details = """
 👤 Name: Kaushik Aryan
 📚 Class: 11th
@@ -44,7 +45,11 @@ def chat(update, context):
     update.message.reply_text(reply)
 
 def main():
-    TOKEN = "8010414260:AAGCeBZuzLGTzOTJWrXPohsKpeSeQh3Bgdw"
+    # 🔐 TOKEN from Environment Variable
+    TOKEN = os.getenv("8010414260:AAGCeBZuzLGTzOTJWrXPohsKpeSeQh3Bgdw")
+
+    if not TOKEN:
+        raise ValueError("BOT_TOKEN environment variable not set")
 
     updater = Updater(TOKEN, use_context=True)
     dp = updater.dispatcher
@@ -55,7 +60,6 @@ def main():
     updater.start_polling()
     updater.idle()
 
-# ENTRY POINT (must be at end)
+# Entry point
 if __name__ == "__main__":
     main()
-
