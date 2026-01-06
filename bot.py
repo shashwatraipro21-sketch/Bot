@@ -1,4 +1,5 @@
-from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
+from telegram import Update
+from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, ContextTypes, filters
 import logging
 import os
 
@@ -21,8 +22,8 @@ my_details = """
 """
 
 # /start command
-def start(update, context):
-    update.message.reply_text(
+async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await update.message.reply_text(
         "Hello! Main ek Telegram Chat Bot hoon 🤖\n\n"
         "Mere creator ke details:\n"
         f"{my_details}\n"
@@ -30,7 +31,7 @@ def start(update, context):
     )
 
 # Chat handler
-def chat(update, context):
+async def chat(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_message = update.message.text.lower()
 
     if "hello" in user_message or "hi" in user_message:
@@ -42,32 +43,21 @@ def chat(update, context):
     else:
         reply = f"Tumne kaha: {update.message.text}\nMain reply dene ki koshish kar raha hoon 🙂"
 
-    update.message.reply_text(reply)
-
-
-
-# ... upar ka code (imports, my_details, start(), chat() etc.) ...
+    await update.message.reply_text(reply)
 
 def main():
-    # 🔐 TOKEN from Environment Variable
     TOKEN = os.getenv("BOT_TOKEN")
 
     if not TOKEN:
         raise ValueError("BOT_TOKEN environment variable not set")
 
-    updater = Updater(TOKEN, use_context=True)
-    dp = updater.dispatcher
+    app = ApplicationBuilder().token(TOKEN).build()
 
-    dp.add_handler(CommandHandler("start", start))
-    dp.add_handler(MessageHandler(Filters.text & ~Filters.command, chat))
+    app.add_handler(CommandHandler("start", start))
+    app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, chat))
 
-    updater.start_polling()
-    updater.idle()
+    print("🤖 Bot is running...")
+    app.run_polling()
 
-# 👇 Paste this at the very end of the file
 if __name__ == "__main__":
     main()
-
-
-
-
