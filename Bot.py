@@ -17,7 +17,8 @@ my_details = """
 😌 Personality: Calm person
 🎂 Age: 16
 🎯 Goal: Preparing for NEET
-"""
+"""if __name__ == "__main__":
+    main()
 
 # /start command
 def start(update, context):
