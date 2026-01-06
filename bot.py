@@ -44,6 +44,10 @@ def chat(update, context):
 
     update.message.reply_text(reply)
 
+
+
+# ... upar ka code (imports, my_details, start(), chat() etc.) ...
+
 def main():
     # 🔐 TOKEN from Environment Variable
     TOKEN = os.getenv("8010414260:AAGCeBZuzLGTzOTJWrXPohsKpeSeQh3Bgdw")
@@ -60,6 +64,10 @@ def main():
     updater.start_polling()
     updater.idle()
 
-# Entry point
+# 👇 Paste this at the very end of the file
 if __name__ == "__main__":
     main()
+
+
+
+
