@@ -50,7 +50,7 @@ def chat(update, context):
 
 def main():
     # 🔐 TOKEN from Environment Variable
-    TOKEN = os.getenv("8010414260:AAGCeBZuzLGTzOTJWrXPohsKpeSeQh3Bgdw")
+    TOKEN = os.getenv("BOT_TOKEN")
 
     if not TOKEN:
         raise ValueError("BOT_TOKEN environment variable not set")
